@@ -3,7 +3,7 @@
 
 int checkTemperature(float temperature)
 {
-   boolean retVal = 1;
+   int retVal = 1;
    if(temperature < 0 || temperature > 45) 
    {
      printf("Temperature out of range!\n");
@@ -14,7 +14,7 @@ int checkTemperature(float temperature)
 
 int checkSoc(float soc)
 {
-   boolean retVal = 1;
+   int retVal = 1;
    if(soc < 20 || soc > 80) {
      printf("State of Charge out of range!\n");
      retVal = 0;
@@ -24,7 +24,7 @@ int checkSoc(float soc)
 
 int checkChargeRate(float chargeRate)
 {
-   boolean retVal = 1;
+   int retVal = 1;
    if(chargeRate > 0.8) {
     printf("Charge Rate out of range!\n");
      retVal = 0;
