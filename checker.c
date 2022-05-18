@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "checkerTypes.h"
 #include <assert.h>
 
 
