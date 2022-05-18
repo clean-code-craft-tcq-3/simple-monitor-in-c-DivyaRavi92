@@ -75,10 +75,6 @@ bool batteryIsOk(float temperature, char temperatureUnit, float soc, float charg
 }
 
 int main() {
- float temperature, soc, chrgRate;
-  char temperatureUnit;
-  printf("Enter temperature unit C for celcius F for Farenheit, Enter temperature, Enter SOC, Enter chargeRate\n");
-  scanf("%c %f %f %f\n", &temperatureUnit, &temperature, &soc, &chrgRate) ;
-  batteryIsOk(temperature,temperatureUnit,soc,chrgRate) ;
-  
+ 
+   batteryIsOk(50,'C',20,0.4) ;
 }
