@@ -1,41 +1,69 @@
 #include <stdio.h>
 #include <assert.h>
 
-int checkTemperature(float temperature)
+
+void convertTemperatureInCelcius(float *temperature, char temperatureUnit)
 {
-   int retVal = 1;
-   if(temperature < 0 || temperature > 45) 
+   if(temperatureUnit == 'F') 
    {
-     printf("Temperature out of range!\n");
-     retVal = 0;
+     temperature =  (temperature - 32)* (5/9) ;
    }
+
+} 
+
+bool isValueInRange(float parameterVal, float minVal, float maxVal, float tolerance, paramChecked parameterName)
+{
+  bool retVal = TRUE;  
+  if(parameterVal < (minVal+tolerance)  || parameterVal > (maxVal-tolerance) )
+  {
+      printMessage(parameterName);
+      retVal = FALSE;
+  }
+  return retVal;
+}
+
+void printMessage()
+{
+  
+  if(parameterVal < minVal || parameterVal > maxVal)
+  {
+      printf("%s is out of Range", parameterName);
+  }
+  else
+  {
+    printf("%s is going to be exceeded", parameterName);
+  }
+}
+
+bool checkTemperature(float temperature, char temperatureUnit)
+{
+   bool retVal;
+   float minValue =  0, maxValue = 45, tolerance = 2.25;
+   temperature = convertTemperatureInCelcius(&temperature,temperatureUnit);
+   retVal = isValueInRange(temperature, minValue, maxValue, TEMPERATURE);
    return retVal;
  } 
 
 int checkSoc(float soc)
 {
-   int retVal = 1;
-   if(soc < 20 || soc > 80) {
-     printf("State of Charge out of range!\n");
-     retVal = 0;
-   }
+   bool retVal;
+   float minValue =  20, maxValue = 80, tolerance = 4;
+   retVal = isValueInRange(soc, minValue, maxValue, SOC);
    return retVal;
  } 
 
 int checkChargeRate(float chargeRate)
 {
-   int retVal = 1;
-   if(chargeRate > 0.8) {
-    printf("Charge Rate out of range!\n");
-     retVal = 0;
-   }
+   bool retVal;
+   float minValue =  0, maxValue = 0.8, tolerance = 0.04;
+   retVal = isValueInRange(chargeRate, minValue, maxValue, tolerance, CHARGERATE);
    return retVal;
- } 
+} 
 
-int batteryIsOk(float temperature, float soc, float chargeRate) {
+bool batteryIsOk(float temperature, char temperatureUnit, float soc, float chargeRate) {
  
-  int batteryOK = 1;
-  batteryOK  = batteryOK & checkTemperature(temperature);
+  bool batteryOK = 1;
+  batteryOK  = batteryOK & checkTemperature(temperature,temperatureUnit);
   batteryOK  = batteryOK & checkSoc(soc);
   batteryOK  = batteryOK & checkChargeRate(chargeRate);
   
@@ -44,6 +72,17 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
 }
 
 int main() {
-  assert(batteryIsOk(25, 70, 0.7) );
-  assert(!batteryIsOk(50, 85, 0) );
+
+  printf("Enter temperature: ");
+  scanf("%f\n", &temperature) ;
+  printf("Enter temperature unit C for celcius F for Farenheit: ");
+  scanf("%c\n", &temperatureUnit) ;
+  printf("Enter SOC: ");
+  scanf("%f\n", &soc) ;
+  printf("Enter chargeRate: ");
+  scanf("%f\n", &chrgRate) ;
+
+  batteryIsOk(float temperature,char temperatureUnit,float soc, float chargeRate) ;
+ 
+  
 }
