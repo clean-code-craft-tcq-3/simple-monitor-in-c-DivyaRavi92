@@ -1,4 +1,5 @@
 #include "checkerTypes.h"
+#include "stdbool.h"
 #include <assert.h>
 
 
