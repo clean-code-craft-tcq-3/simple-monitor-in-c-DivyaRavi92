@@ -6,53 +6,55 @@ void convertTemperatureInCelcius(float *temperature, char temperatureUnit)
 {
    if(temperatureUnit == 'F') 
    {
-     temperature =  (temperature - 32)* (5/9) ;
+     *temperature =  (*temperature - 32)* (5/9) ;
    }
 
 } 
 
-bool isValueInRange(float parameterVal, float minVal, float maxVal, float tolerance, paramChecked parameterName)
-{
-  bool retVal = TRUE;  
-  if(parameterVal < (minVal+tolerance)  || parameterVal > (maxVal-tolerance) )
-  {
-      printMessage(parameterName);
-      retVal = FALSE;
-  }
-  return retVal;
-}
-
-void printMessage()
+void printMessage(paramChecked parameterName, float parameterVal, float minVal, float maxVal)
 {
   
   if(parameterVal < minVal || parameterVal > maxVal)
   {
-      printf("%s is out of Range", parameterName);
+      printf("%d is out of Range", parameterName);
   }
   else
   {
-    printf("%s is going to be exceeded", parameterName);
+    printf("%d is going to be exceeded", parameterName);
   }
 }
+
+bool isValueInRange(float parameterVal, float minVal, float maxVal, float tolerance, paramChecked parameterName)
+{
+  bool retVal = 1;  
+  if(parameterVal < (minVal+tolerance)  || parameterVal > (maxVal-tolerance) )
+  {
+      printMessage(parameterName, parameterVal, minVal, maxVal);
+      retVal = 0;
+  }
+  return retVal;
+}
+
+
 
 bool checkTemperature(float temperature, char temperatureUnit)
 {
    bool retVal;
    float minValue =  0, maxValue = 45, tolerance = 2.25;
-   temperature = convertTemperatureInCelcius(&temperature,temperatureUnit);
-   retVal = isValueInRange(temperature, minValue, maxValue, TEMPERATURE);
+   convertTemperatureInCelcius(&temperature,temperatureUnit);
+   retVal = isValueInRange(temperature, minValue, maxValue, tolerance, TEMPERATURE);
    return retVal;
  } 
 
-int checkSoc(float soc)
+bool checkSoc(float soc)
 {
    bool retVal;
    float minValue =  20, maxValue = 80, tolerance = 4;
-   retVal = isValueInRange(soc, minValue, maxValue, SOC);
+   retVal = isValueInRange(soc, minValue, maxValue,tolerance, SOC);
    return retVal;
  } 
 
-int checkChargeRate(float chargeRate)
+bool checkChargeRate(float chargeRate)
 {
    bool retVal;
    float minValue =  0, maxValue = 0.8, tolerance = 0.04;
@@ -72,7 +74,8 @@ bool batteryIsOk(float temperature, char temperatureUnit, float soc, float charg
 }
 
 int main() {
-
+  float temperature, soc, chrgRate;
+  char temperatureUnit;
   printf("Enter temperature: ");
   scanf("%f\n", &temperature) ;
   printf("Enter temperature unit C for celcius F for Farenheit: ");
@@ -82,7 +85,7 @@ int main() {
   printf("Enter chargeRate: ");
   scanf("%f\n", &chrgRate) ;
 
-  batteryIsOk(float temperature,char temperatureUnit,float soc, float chargeRate) ;
+  batteryIsOk(temperature,temperatureUnit,soc,chrgRate) ;
  
   
 }
