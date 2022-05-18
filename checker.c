@@ -75,7 +75,10 @@ bool batteryIsOk(float temperature, char temperatureUnit, float soc, float charg
 }
 
 int main() {
- assert(batteryIsOk(25, C, 70, 0.7) );
- assert(!batteryIsOk(150,F, 85, 0) );
+ float temperature, soc, chrgRate;
+  char temperatureUnit;
+  printf("Enter temperature unit C for celcius F for Farenheit, Enter temperature, Enter SOC, Enter chargeRate\n");
+  scanf("%c %f %f %f\n", &temperatureUnit, &temperature, &soc, &chrgRate) ;
+  batteryIsOk(temperature,temperatureUnit,soc,chrgRate) ;
   
 }
