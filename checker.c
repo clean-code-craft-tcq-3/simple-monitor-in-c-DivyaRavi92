@@ -77,9 +77,9 @@ bool batteryIsOk(float temperature, char temperatureUnit, float soc, float charg
 int main() {
  
    batteryIsOk(50,'C',20,0.4) ;
-   batteryIsOk(68,'F',18,0.9) ;
-   batteryIsOk(44,'C',76,0.77) ;
-   batteryIsOk(30,'C',81,0.6) ;
-   batteryIsOk(100,'F',25,0) ;
+   //batteryIsOk(68,'F',18,0.9) ;
+   //batteryIsOk(44,'C',76,0.77) ;
+   //batteryIsOk(30,'C',81,0.6) ;
+//batteryIsOk(100,'F',25,0) ;
    
 }
