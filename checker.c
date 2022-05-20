@@ -12,26 +12,28 @@ void convertTemperatureInCelcius(float *temperature, char temperatureUnit)
 
 } 
 
-void printMessage(paramChecked parameterName, float parameterVal, float minVal, float maxVal)
+bool printMessage(paramChecked parameterName, float parameterVal, float minVal, float maxVal)
 {
-  
+  bool retVal = TRUE;
   if(parameterVal < minVal || parameterVal > maxVal)
   {
       printf("%d is out of Range", parameterName);
+      retVal = FALSE;
   }
   else
   {
     printf("%d is going to be exceeded", parameterName);
   }
+  return retVal;
 }
 
 bool isValueInRange(float parameterVal, float minVal, float maxVal, float tolerance, paramChecked parameterName)
 {
-  bool retVal = 1;  
+  bool retVal = TRUE;  
   if(parameterVal < (minVal+tolerance)  || parameterVal > (maxVal-tolerance) )
   {
-      printMessage(parameterName, parameterVal, minVal, maxVal);
-      retVal = 0;
+      retVal = printMessage(parameterName, parameterVal, minVal, maxVal);
+      
   }
   return retVal;
 }
